@@ -4,61 +4,48 @@ const c = canvas.getContext("2d");
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
-let numPerFrame = 10;
+let numPerFrame = 2;
 let particles = {};
 let particleindex = 0;
-
-const mouse = {
-  x: innerWidth / 2,
-  y: innerHeight / 2
-};
-
-const colors = ["#014656", "#009EA9", "#F8F7F5", "#FAD956", "#F8A602"];
 
 //Utility Functions
 function randomRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-function randomColor(colors) {
-  return colors[Math.floor(Math.random() * colors.length)];
+function countParticles(obj) {
+  var count = 0;
+
+  for (var property in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, property)) {
+      count++;
+    }
+  }
+
+  return count;
 }
 
-function distance(x1, y1, x2, y2) {
-  const xDist = x2 - x1;
-  const yDist = y2 - y1;
-
-  return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
-}
-
-// Event Listeners
-addEventListener("mousemove", event => {
-  mouse.x = event.clientX;
-  mouse.y = event.clientY;
-});
-
+// Event Listener
 addEventListener("resize", () => {
   canvas.width = innerWidth;
   canvas.height = innerHeight;
-
-  //init()
 });
 
 // Constructor Function
-function Particle(color) {
+function Particle() {
   this.x = canvas.width / 2;
   this.y = canvas.height / 2;
-  this.radius = 3;
+  this.radius = 5;
   this.dx = Math.random() * 10 - 5;
-  this.dy = Math.random() * 10 - 8;
-  this.gravity = 0.3;
-  this.color = color;
+  this.dy = Math.random() * 10 - 5;
+  // this.gravity = 0.3;
+  this.color = "hsla(" + parseInt(Math.random() * 255, 10) + ", 90%, 50%, 0.7)";
 
   particleindex++;
   particles[particleindex] = this;
   this.id = particleindex;
   this.life = 0;
-  this.lifespan = Math.random() * 30 + 10;
+  this.lifespan = Math.random() * 30 + 50;
 
   this.draw = () => {
     c.beginPath();
@@ -66,8 +53,6 @@ function Particle(color) {
     c.fillStyle = this.color;
     c.fill();
     c.closePath();
-    // c.fillStyle = "white";
-    // c.fillRect(this.x, this.y, 10, 10);
   };
 
   this.update = () => {
@@ -75,7 +60,15 @@ function Particle(color) {
 
     this.x += this.dx;
     this.y += this.dy;
-    this.dy += this.gravity;
+
+    //re-Randomize speeds
+    if (Math.random() < 0.1) {
+      this.dx = Math.random() * 10 - 5;
+      this.dy = Math.random() * 10 - 5;
+    }
+
+    //Gravity
+    // this.dy += this.gravity;
     this.life++;
 
     if (this.life >= this.lifespan) {
@@ -90,9 +83,19 @@ function animate() {
   //Background
   c.fillStyle = "rgba(22,25,27, 0.3)";
   c.fillRect(0, 0, canvas.width, canvas.height);
+
+  //Population counter
+  c.fillStyle = "white";
+  let totalParticles = countParticles(particles);
+  c.font = "15px Arial";
+  c.fillText("Population: " + totalParticles + "", 10, 30);
+
+  //Particle Generator
   for (var i = 0; i < numPerFrame; i++) {
-    new Particle(randomColor(colors));
+    new Particle();
   }
+
+  //Draw & Update each particle
   for (var i in particles) {
     particles[i].update();
   }
