@@ -14,15 +14,15 @@ function randomRange(min, max) {
 }
 
 function countParticles(obj) {
-  var count = 0;
+  var total = 0;
 
   for (var property in obj) {
     if (Object.prototype.hasOwnProperty.call(obj, property)) {
-      count++;
+      total++;
     }
   }
 
-  return count;
+  return total;
 }
 
 // Event Listener
@@ -71,6 +71,7 @@ function Particle() {
     // this.dy += this.gravity;
     this.life++;
 
+    //Delete old particles
     if (this.life >= this.lifespan) {
       delete particles[this.id];
     }
