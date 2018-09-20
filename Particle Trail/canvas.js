@@ -9,7 +9,7 @@ const mouse = {
   y: innerHeight / 2
 };
 
-let numPerFrame = 2;
+let numPerFrame = 5;
 let particles = {};
 let particleindex = 0;
 
@@ -92,7 +92,7 @@ function Particle(x, y, col) {
 function animate() {
   requestAnimationFrame(animate);
   //Background
-  c.fillStyle = "rgba(22,25,27, 0.3)";
+  c.fillStyle = "rgba(22,25,27, 1)";
   c.fillRect(0, 0, canvas.width, canvas.height);
 
   //Population counter
