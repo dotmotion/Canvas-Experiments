@@ -54,9 +54,10 @@ function animate() {
   requestAnimationFrame(animate);
   //Clearing the Canvas (transparent)
   c.clearRect(x, y, width, height);
+
   //Clearing the Canvas (background)
   c.fillStyle = "";
-  c.fillRect;
+  c.fillRect(x, y, width, height);
 
   //Loop
   for (var i = 0; i < Shapes.length; i++) {
