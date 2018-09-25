@@ -24,7 +24,7 @@ addEventListener("resize", () => {
 });
 
 // Constructor Function
-function Circle(x, y, radius, color) {
+function Circle(x, y) {
   this.x = x;
   this.y = y;
   this.radius = radius;
@@ -49,7 +49,7 @@ function init() {
   Circles = [];
 
   for (let i = 0; i < 400; i++) {
-    Circles.push(new Circle(x, y, radius, color));
+    Circles.push(new Circle(x, y));
   }
 }
 
