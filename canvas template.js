@@ -4,11 +4,6 @@ const c = canvas.getContext("2d");
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
-const mouse = {
-  x: innerWidth / 2,
-  y: innerHeight / 2
-};
-
 const colors = ["#FF6138", "#FFFF9D", "#BEEB9F", "#79BD8F", "#00A388"];
 
 //Utility Functions
@@ -20,19 +15,7 @@ function randomColor(colors) {
   return colors[Math.floor(Math.random() * colors.length)];
 }
 
-function distance(x1, y1, x2, y2) {
-  const xDist = x2 - x1;
-  const yDist = y2 - y1;
-
-  return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
-}
-
 // Event Listeners
-addEventListener("mousemove", event => {
-  mouse.x = event.clientX;
-  mouse.y = event.clientY;
-});
-
 addEventListener("resize", () => {
   canvas.width = innerWidth;
   canvas.height = innerHeight;
