@@ -15,25 +15,21 @@ function randomColor(colors) {
   return colors[Math.floor(Math.random() * colors.length)];
 }
 
-// Event Listeners
-addEventListener("resize", () => {
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
-
-  //init()
-});
-
-// Constructor Function
-function Circle() {
-  this.x = x;
-  this.y = y;
-  this.radius = radius;
-  this.color = color;
-
+// Constructor
+function Shape() {
+  //Properties
+  //this.something = something;
+  //
   this.draw = function() {
+    //Rectangle
+    c.rect(x, y, width, height);
+    c.fillStyle = "";
+    c.fill();
+
+    //Circle / Arc
     c.beginPath();
-    c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    c.fillStyle = this.color;
+    c.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+    c.fillStyle = "";
     c.fill();
     c.closePath();
   };
@@ -44,24 +40,29 @@ function Circle() {
 }
 
 // Array Generator
-let Circles;
-function init() {
-  Circles = [];
+var Shapes;
+function generate() {
+  Shapes = [];
 
-  for (let i = 0; i < 400; i++) {
-    Circles.push(new Circle());
+  for (var i = 0; i < 100; i++) {
+    Shapes.push(new Shape());
   }
 }
 
 // Animation Loop
 function animate() {
   requestAnimationFrame(animate);
-  c.clearRect(0, 0, canvas.width, canvas.height);
+  //Clearing the Canvas (transparent)
+  c.clearRect(x, y, width, height);
+  //Clearing the Canvas (background)
+  c.fillStyle = "";
+  c.fillRect;
 
-  Circles.forEach(Circle => {
-    Circle.update();
-  });
+  //Loop
+  for (var i = 0; i < Shapes.length; i++) {
+    Shapes.update();
+  }
 }
 
-init();
+generate();
 animate();
