@@ -126,3 +126,24 @@ function generate() {
     Squares.push(new Shape());
   }
 }
+
+//      Canvas methods
+//Working with the Canvas
+var canvas = document.querySelector("canvas");
+var c = canvas.getContext("2d");
+
+//Clearing the Canvas
+c.clearRect(x, y, width, height);
+
+//Fill & Border Color
+c.fillStyle("color");
+c.fill();
+
+c.strokeStyle("color");
+c.stroke();
+
+//Rectangle
+c.rect(x, y, width, height);
+
+//Circle / Arc
+c.arc(x, y, radius, startAngle, endAngle, anticlockwise);
