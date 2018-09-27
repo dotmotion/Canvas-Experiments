@@ -1,24 +1,15 @@
-const canvas = document.querySelector("canvas");
-const c = canvas.getContext("2d");
+var canvas = document.querySelector("canvas");
+var c = canvas.getContext("2d");
 
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
-const colors = ["#FF6138", "#FFFF9D", "#BEEB9F", "#79BD8F", "#00A388"];
-
-//Utility Functions
-function randomRange(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-function randomColor(colors) {
-  return colors[Math.floor(Math.random() * colors.length)];
-}
+var colors = ["#FF6138", "#FFFF9D", "#BEEB9F", "#79BD8F", "#00A388"];
 
 // Constructor
 function Shape() {
+  //
   //Properties
-  //this.something = something;
   //
   this.draw = function() {
     //Rectangle
@@ -36,17 +27,8 @@ function Shape() {
 
   this.update = function() {
     this.draw();
+    //things to do each frame
   };
-}
-
-// Array Generator
-var Shapes;
-function generate() {
-  Shapes = [];
-
-  for (var i = 0; i < 100; i++) {
-    Shapes.push(new Shape());
-  }
 }
 
 // Animation Loop
@@ -65,5 +47,49 @@ function animate() {
   }
 }
 
+// Array Generator
+var Shapes;
+function generate() {
+  Shapes = [];
+
+  for (var i = 0; i < 100; i++) {
+    Shapes.push(new Shape());
+  }
+}
+
+//Utility Functions
+function randomRange(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function randomColor(colors) {
+  return colors[Math.floor(Math.random() * colors.length)];
+}
+
 generate();
 animate();
+
+//        EXAMPLE
+
+function Square() {
+  this.x = 50;
+  this.y = 50;
+  this.dx = 1;
+  this.dy = 1;
+  this.color = "black";
+
+  this.draw = () => {
+    //Rectangle
+    c.rect(this.x, this.y, 20, 20);
+    c.fillStyle = this.color;
+    c.fill();
+  };
+
+  this.update = () => {
+    // Move
+    this.y += this.dy;
+    this.x += this.dx;
+    // Draw on new position
+    this.draw();
+  };
+}
