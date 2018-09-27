@@ -69,7 +69,7 @@ function randomColor(colors) {
 generate();
 animate();
 
-//        EXAMPLE
+//        EXAMPLE 1
 
 function Square() {
   this.x = 50;
@@ -92,4 +92,37 @@ function Square() {
     // Draw on new position
     this.draw();
   };
+}
+
+//         Example 2
+
+function Square() {
+  this.x = randomRange(0, "width");
+  this.y = randomRange(0, "height");
+  this.dx = 1;
+  this.dy = 1;
+  this.color = randomColor(colors);
+
+  this.draw = () => {
+    //Rectangle
+    c.rect(this.x, this.y, 20, 20);
+    c.fillStyle = this.color;
+    c.fill();
+  };
+
+  this.update = () => {
+    // Move
+    this.y += this.dy;
+    this.x += this.dx;
+    // Draw on new position
+    this.draw();
+  };
+}
+var Squares; // Squares[1, 2, 3, 4, ...]
+function generate() {
+  Squares = [];
+
+  for (var i = 0; i < 100; i++) {
+    Squares.push(new Shape());
+  }
 }
