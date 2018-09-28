@@ -103,14 +103,14 @@ function Square() {
   this.dy = 1;
   this.color = randomColor(colors);
 
-  this.draw = () => {
+  this.draw = function() {
     //Rectangle
     c.rect(this.x, this.y, 20, 20);
     c.fillStyle = this.color;
     c.fill();
   };
 
-  this.update = () => {
+  this.update = function() {
     // Move
     this.y += this.dy;
     this.x += this.dx;
@@ -128,22 +128,28 @@ function generate() {
 }
 
 //      Canvas methods
+
 //Working with the Canvas
 var canvas = document.querySelector("canvas");
 var c = canvas.getContext("2d");
 
-//Clearing the Canvas
+// Clearing the Canvas
 c.clearRect(x, y, width, height);
 
-//Fill & Border Color
-c.fillStyle("color");
+// Fill & Border Color
+c.fillStyle = "color";
 c.fill();
 
-c.strokeStyle("color");
+c.strokeStyle = "color";
 c.stroke();
 
-//Rectangle
+// Rectangle
+c.fillStyle = "color";
 c.rect(x, y, width, height);
 
-//Circle / Arc
+// Circle / Arc
+c.beginPath();
 c.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+c.fillStyle = "color";
+c.fill();
+c.closePath();
