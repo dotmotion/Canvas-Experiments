@@ -1,8 +1,8 @@
 var canvas = document.querySelector("canvas");
 var c = canvas.getContext("2d");
 
-canvas.height = 400;
-canvas.width = 400;
+canvas.height = 300;
+canvas.width = 300;
 
 var colors = ["#FF6138", "#FFFF9D", "#BEEB9F", "#79BD8F", "#00A388"];
 
@@ -20,15 +20,16 @@ c.fillRect(0, 0, canvas.width, canvas.height);
 
 // Constructor
 function Square() {
-  this.x = 0;
-  this.y = 0;
-  this.dx = 0;
-  this.dy = 0;
-  this.color = "white";
+  this.x = randomRange(0, canvas.width);
+  this.y = randomRange(0, canvas.height);
+  this.dx = randomRange(-2, 2);
+  this.dy = randomRange(-2, 2);
+  this.color = randomColor(colors);
+  this.size = 10;
 
   this.draw = function() {
     //Rectangle
-    c.rect(this.x, this.y, 5, 5);
+    c.rect(this.x, this.y, this.size, this.size);
     c.fillStyle = this.color;
     c.fill();
   };
@@ -47,7 +48,7 @@ var Squares;
 function generate() {
   Squares = [];
 
-  for (var i = 0; i < 100; i++) {
+  for (var i = 0; i < 10; i++) {
     Squares.push(new Square());
   }
 }
@@ -56,13 +57,14 @@ function generate() {
 function animate() {
   requestAnimationFrame(animate);
   //Clearing the Canvas (background)
-  c.fillStyle = "";
-  c.fillRect(x, y, width, height);
+  c.fillStyle = "black";
+  c.fillRect(0, 0, canvas.width, canvas.height);
 
-  //Loop
-  for (var i = 0; i < Shapes.length; i++) {
-    Squares.update();
+  // Loop
+  for (var i = 0; i < Squares.length; i++) {
+    Squares[i].update();
   }
+  console.log("it works!");
 }
 
 generate();
